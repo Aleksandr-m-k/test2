@@ -1,14 +1,11 @@
-package web.Service;
+package web.service;
 
-import jdk.jfr.TransitionTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.DAO.CarDao;
+import web.dao.CarDao;
 import web.model.Car;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
