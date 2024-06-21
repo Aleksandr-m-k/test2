@@ -57,12 +57,12 @@ public class UserController {
         return "edit";
     }
 
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userDAO.update(id, user);
-        System.out.println("izmenen user");
-        return "redirect:/users";
-    }
+//    @PatchMapping("/{id}")
+//    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+//        userDAO.update(id, user);
+//        System.out.println("izmenen user");
+//        return "redirect:/users";
+//    }
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id){
         userDAO.deleteUser(id);
