@@ -6,25 +6,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.dao.UserDao;
 import web.model.User;
-
+import web.servise.UserService;
 
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserDao userDAO;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserDao userDAO) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
 
     @GetMapping()
 // получим всех людей из DAO и перададим на отображение в представленние
     public String index(Model model) {
-        model.addAttribute("users", userDAO.getUsers());
+        model.addAttribute("users", userService.getUsers());
         return "users";
     }
 
@@ -32,7 +32,7 @@ public class UserController {
     @GetMapping("/{id}")
     // получим одного человека по id из DAO и перададим на отображение в представленние
     public String getUserById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("userById", userDAO.getUserById(id));
+        model.addAttribute("userById", userService.getUserById(id));
         return "userById";
     }
 
@@ -46,13 +46,13 @@ public class UserController {
     @PostMapping()
     public String create(@ModelAttribute("newUser") User user) {
         System.out.println("sozdan user");
-        userDAO.save(user);
+        userService.save(user);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userDAO.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         System.out.println("izmenenie user");
         return "edit";
     }
@@ -65,7 +65,7 @@ public class UserController {
 //    }
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id){
-        userDAO.deleteUser(id);
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }
